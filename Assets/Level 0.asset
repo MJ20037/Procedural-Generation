@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b94ef0b8459674a8ca541bcd84d080, type: 3}
+  m_Name: Level 0
+  m_EditorClassIdentifier: 
+  width: 64
+  length: 64
+  roomTemplates:
+  - name: small
+    numberOfRooms: 8
+    roomWidthMin: 3
+    roomWidthMax: 7
+    roomLengthMin: 3
+    roomLengthMax: 7
+  - name: Large
+    numberOfRooms: 5
+    roomWidthMin: 12
+    roomWidthMax: 15
+    roomLengthMin: 12
+    roomLengthMax: 15
+  doorDistanceFromEdge: 1
+  hallwayLengthMin: 0
+  hallwayLengthMax: 7
+  maxRoomCount: 20
+  minRoomDistance: 0
