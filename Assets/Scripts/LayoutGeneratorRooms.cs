@@ -19,16 +19,18 @@ public class LayoutGeneratorRooms : MonoBehaviour
 
     [ContextMenu("Generate Level Layout")]
 
-    public void GenerateLevel()
+    public Level GenerateLevel()
     {
-        random = new Random(seed);
+        SharedLevelData.Instance.ResetRandom();
+        random = SharedLevelData.Instance.Rand;
+
         availableRooms = levelConfig.GetAvailableRooms();
         openDoorways = new List<Hallway>();
         level = new Level(levelConfig.Width, levelConfig.Length);
         RoomTemplate startRoomTemplate = availableRooms.Keys.ElementAt(random.Next(0, availableRooms.Count));
-        
+
         RectInt roomRect = GetStartRoomRect(startRoomTemplate);
-        Room room = CreateNewRoom(roomRect,startRoomTemplate);
+        Room room = CreateNewRoom(roomRect, startRoomTemplate);
         List<Hallway> hallways = room.CalculateAllPossibleDoorways(room.Area.width, room.Area.height, levelConfig.DoorDistanceFromEdge);
         hallways.ForEach((h) => h.StartRoom = room);
         hallways.ForEach((h) => openDoorways.Add(h));
@@ -37,12 +39,16 @@ public class LayoutGeneratorRooms : MonoBehaviour
         Hallway selectedEntryway = openDoorways[random.Next(openDoorways.Count)];
         AddRooms();
         DrawLayout(selectedEntryway, roomRect);
+        int startRoomIndex = random.Next(0, level.Rooms.Length);
+        Room randomStartRoom = level.Rooms[startRoomIndex];
+        level.playerStartRoom = randomStartRoom;
+        return level;
     }
 
     [ContextMenu("Generate new seed")]
     public void GenerateNewSeed()
     {
-        seed = Environment.TickCount;
+        SharedLevelData.Instance.GenerateSeed();
     }
 
     [ContextMenu("Generate new Seed and Level")]
@@ -200,6 +206,23 @@ public class LayoutGeneratorRooms : MonoBehaviour
         RoomTemplate roomTemplate= availableRooms.Keys.ElementAt(random.Next(0, availableRooms.Count));
         RectInt roomCandidateRect = roomTemplate.GenerateRoomCandidateRect(random);
         Hallway selectedExit = SelectHallwayCandidate(roomCandidateRect, roomTemplate, selectedEntryway);
+
+        if (selectedExit == null && availableRooms.Count > 0)
+        {
+            // try to get another room if available
+            for (int r = 0; r < availableRooms.Count; r++)
+            {
+                roomTemplate = availableRooms.Keys.ElementAt(random.Next(0, availableRooms.Count));
+                roomCandidateRect = roomTemplate.GenerateRoomCandidateRect(random);
+                selectedExit = SelectHallwayCandidate(roomCandidateRect, roomTemplate, selectedEntryway);
+
+                if (selectedExit != null)
+                {
+                    break;
+                }
+            }
+        }
+
         if (selectedExit == null) { return null; }
 
         Vector2Int roomCandidatePosition = CalculateRoomPosition(selectedEntryway, roomCandidateRect.width, roomCandidateRect.height, random.Next(levelConfig.HallwayLengthMin, levelConfig.HallwayLengthMax + 1), selectedExit.StartPosition);
