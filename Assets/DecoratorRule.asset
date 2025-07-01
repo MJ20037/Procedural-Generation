@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87c00ce1f606bf44886f49921847ddaf, type: 3}
-  m_Name: AllCornersPillar
+  m_Name: DecoratorRule
   m_EditorClassIdentifier: 
   prefab: {fileID: 0}
   placement:
-    array: 
-    width: 0
-    height: 0
+    array: 02000000020000000200000002000000
+    width: 2
+    height: 2
   fill:
     array: 
     width: 0
