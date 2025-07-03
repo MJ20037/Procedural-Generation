@@ -8,8 +8,11 @@ using Random = System.Random;
 public class PatternMatchingDecoratorRoom : BaseDecoratorRule
 {
     [SerializeField] GameObject prefab;
+    [SerializeField] float prefabRotation = 0;
     [SerializeField] Array2DWrapper<TileType> placement;
     [SerializeField] Array2DWrapper<TileType> fill;
+    [SerializeField] bool centerHorizontally = false;
+    [SerializeField] bool centerVertically = false;
 
     internal override void Apply(TileType[,] levelDecorated, Room room, Transform parent)
     {
@@ -28,6 +31,8 @@ public class PatternMatchingDecoratorRoom : BaseDecoratorRule
         }
 
         GameObject decoration = Instantiate(prefab, parent.transform);
+        Vector3 currentRotation = decoration.transform.eulerAngles;
+        decoration.transform.eulerAngles = currentRotation + new Vector3(0, prefabRotation, 0);
         Vector3 center = new Vector3(occurence.x + placement.Width / 2.0f, 0, occurence.y + placement.Height / 2.0f);
         int scale = SharedLevelData.Instance.Scale;
         decoration.transform.position = (center + new Vector3(-1, 0, -1)) * scale;
@@ -46,14 +51,24 @@ public class PatternMatchingDecoratorRoom : BaseDecoratorRule
     private Vector2Int[] FindOccurences(TileType[,] levelDecorated, Room room)
     {
         List<Vector2Int> occurences = new List<Vector2Int>();
+        int centerX = room.Area.position.x + room.Area.width / 2 - placement.Width/2;
+        int centerY = room.Area.position.y + room.Area.height / 2 - placement.Length/2;
         for (int y = room.Area.position.y - 1; y < room.Area.position.y + room.Area.height + 2 - placement.Height; y++)
         {
+            if (centerVertically && y != centerY)
+                {
+                    continue;
+                }
             for (int x = room.Area.position.x - 1; x < room.Area.position.x + room.Area.width + 2 - placement.Width; x++)
             {
+                if (centerHorizontally && x != centerX)
+                {
+                    continue;
+                }
                 if (IsPatternAtPosition(levelDecorated, placement, x, y))
                 {
                     occurences.Add(new Vector2Int(x, y));
-                    
+
                 }
             }
         }
