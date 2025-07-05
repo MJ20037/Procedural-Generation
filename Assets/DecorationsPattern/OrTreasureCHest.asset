@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68c14996f1a526145863a5db3e68ba96, type: 3}
+  m_Name: OrTreasureCHest
+  m_EditorClassIdentifier: 
+  childRules:
+  - {fileID: 11400000, guid: a62bfad75da0b104a8aa7688e0f4ed48, type: 2}
+  - {fileID: 11400000, guid: baedc1f7e0a09f546a936a2c0e6214c5, type: 2}
