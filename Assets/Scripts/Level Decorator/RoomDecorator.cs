@@ -67,12 +67,15 @@ public class RoomDecorator : MonoBehaviour
         int currentNumberOfDecorations = 0;
         int maxTries = 50;
         List<RuleAvailability> availableRulesForRoom = CopyRuleAvailability();
-
+        availableRulesForRoom = availableRulesForRoom.Where(
+            ra => ra.rule.RoomTypes.HasFlag(room.Type)).ToList();
+        
         while (currentNumberOfDecorations < maxNumberOfDecorations && currentTries < maxTries && availableRulesForRoom.Count > 0)
         {
             int selectedRuleIndex = random.Next(0, availableRulesForRoom.Count);
             RuleAvailability selectedRuleAvailability = availableRulesForRoom[selectedRuleIndex];
             BaseDecoratorRule selectedRule = selectedRuleAvailability.rule;
+
             if (selectedRule.CanBeApplied(levelDecorated, room))
             {
                 selectedRule.Apply(levelDecorated, room, decorationsTransform);

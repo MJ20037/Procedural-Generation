@@ -26,7 +26,10 @@ public class PatternMatchingDecoratorRoom : BaseDecoratorRule
             for (int x = 0; x < placement.Width; x++)
             {
                 TileType tileType = fill[x, y];
-                levelDecorated[occurence.x + x, occurence.y + y] = tileType;
+                if (!TileType.Noop.Equals(tileType))
+                {
+                    levelDecorated[occurence.x + x, occurence.y + y] = tileType;
+                }
             }
         }
 
@@ -37,6 +40,12 @@ public class PatternMatchingDecoratorRoom : BaseDecoratorRule
         int scale = SharedLevelData.Instance.Scale;
         decoration.transform.position = (center + new Vector3(-1, 0, -1)) * scale;
         decoration.transform.localScale = Vector3.one * scale;
+
+        PropVariationGenerate variationGenerator = decoration.GetComponent<PropVariationGenerate>();
+        if (variationGenerator != null)
+        {
+            variationGenerator.GenerateVariation();
+        }
     }
 
     internal override bool CanBeApplied(TileType[,] levelDecorated, Room room)
@@ -81,7 +90,7 @@ public class PatternMatchingDecoratorRoom : BaseDecoratorRule
         {
             for (int x = 0; x < pattern.Width; x++)
             {
-                if (levelDecorated[startX + x, startY + y] != pattern[x, y])
+                if (!TileType.Noop.Equals(pattern[x,y])&&levelDecorated[startX + x, startY + y] != pattern[x, y])
                 {
                     return false;
                 }

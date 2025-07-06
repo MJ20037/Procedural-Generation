@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87c00ce1f606bf44886f49921847ddaf, type: 3}
   m_Name: Corner Rule 90
   m_EditorClassIdentifier: 
+  roomType: 1
   prefab: {fileID: 8152318342853305396, guid: baab10c4c692b314eb6a6eec2787f8a8, type: 3}
   prefabRotation: 90
   placement:

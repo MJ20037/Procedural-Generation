@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c14996f1a526145863a5db3e68ba96, type: 3}
   m_Name: OrTreasureCHest
   m_EditorClassIdentifier: 
+  roomType: 17
   childRules:
   - {fileID: 11400000, guid: a62bfad75da0b104a8aa7688e0f4ed48, type: 2}
   - {fileID: 11400000, guid: baedc1f7e0a09f546a936a2c0e6214c5, type: 2}

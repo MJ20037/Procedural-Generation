@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87c00ce1f606bf44886f49921847ddaf, type: 3}
-  m_Name: Barrel Horiaontal Center
+  m_Name: Desk At Wall
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1275260121246722862, guid: 2438bc0b661a2a54dabfdaaf9fdf9bca, type: 3}
+  roomType: 65
+  prefab: {fileID: 9074271588866406604, guid: 5e60b5b5570574944a6cefa2d972f470, type: 3}
+  prefabRotation: 0
   placement:
-    array: 040000000400000004000000020000000200000002000000
+    array: 020000000200000002000000040000000400000004000000
     width: 3
     height: 2
   fill:
-    array: 040000000400000004000000020000000600000002000000
+    array: 020000000200000002000000050000000500000005000000
     width: 3
     height: 2
   centerHorizontally: 0

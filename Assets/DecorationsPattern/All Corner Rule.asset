@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbe6c95d16fe3b046b3c529527426358, type: 3}
   m_Name: All Corner Rule
   m_EditorClassIdentifier: 
+  roomType: 1
   childRules:
   - {fileID: 11400000, guid: aaac519729ac6304c9e57f20eece0f26, type: 2}
   - {fileID: 11400000, guid: 76611cfe9b743854a80b03a66315bc3d, type: 2}
